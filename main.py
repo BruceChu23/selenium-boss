@@ -1,4 +1,4 @@
-from spider import Job
+from jobspider import Job
 
 j = input('输入你要获取的职业关键词：')
 job = Job(j)
