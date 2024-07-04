@@ -26,10 +26,9 @@ class Job:
         search_box.send_keys(self.name)
 
         search_button = wait.until(EC.element_to_be_clickable((By.XPATH, '//button[@class="btn btn-search"]')))
-        # search_button.click()
         driver.execute_script("arguments[0].click();", search_button)
 
-        for t in range(10):
+        for t in range(100):
             try:
                 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
                 time.sleep(3)
@@ -62,9 +61,12 @@ class Job:
                     writer = csv.writer(file)
                     # writer.writerow(['Job', 'Salary', 'Company', 'Nature', 'Details'])
                     for i in range(data_length):
-                        writer.writerow([jobs[i], dt(sals, i), dt(coms, i),dt(nars, i),dt(dets, i)])
+                        try:
+                            writer.writerow([jobs[i], dt(sals, i), dt(coms, i),dt(nars, i),dt(dets, i)])
+                        except:
+                            continue
                 with open(f'{self.name}.txt','a') as tt:
-                    tt.write('\n'.join(','.join(lst) for lst in [jobs,sals,coms,nars,dets]))
+                    tt.write('\n'.join(','.join(e for e in lst) for lst in [jobs,sals,coms,nars,dets]))
                 print(f"{csv_file} for {t+1} is ok.")
                 time.sleep(2)
                 # driver.find_element(By.CLASS_NAME, 'btn-next').click()
@@ -81,7 +83,7 @@ class Job:
         driver.quit()
 
 if __name__=='__main__':
-    Law=Job('法务')
-    Data=Job('数据')
-    Law.give_me_job()
-    Data.give_me_job()
+    # Law=Job('法务')
+    # Data=Job('数据')
+    # Law.give_me_job()
+    # Data.give_me_job()
