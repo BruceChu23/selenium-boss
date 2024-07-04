@@ -1,4 +1,4 @@
-# -selenium-boss-
+# selenium-boss
 基于selenium的boss直聘可视化爬虫软件
 
 本爬虫使用selenium可视化爬虫方法
@@ -13,6 +13,14 @@
 
 5.存储为csv文件，进行数据分析
 
+使用方法：
+
+1.使下载的文件于同一文件夹下，运行main.py
+
+2.输入相关关键词，即可开始自动爬取
+
 作者
+
 zcl：202320037@uibe.edu.cn
+
 rjn：202055042@uibe.edu.cn
