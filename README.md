@@ -19,6 +19,10 @@
 
 2.输入相关关键词，即可开始自动爬取
 
+下载：
+
+git clone https://github.com/BruceChu23/selenium-boss.git
+
 作者
 
 zcl：202320037@uibe.edu.cn
