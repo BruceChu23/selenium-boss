@@ -21,7 +21,7 @@
 
 下载：
 
-  git clone https://github.com/BruceChu23/selenium-boss.git
+    git clone https://github.com/BruceChu23/selenium-boss.git
 
 作者
 
