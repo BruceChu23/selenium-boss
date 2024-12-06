@@ -8,8 +8,10 @@ import time
 import csv
 
 class Job:
-    def __init__(self,name) -> None:
-        self.name=name
+    def __init__(self, name, url, pages) -> None:
+        self.name = name
+        self.url = url
+        self.pages = pages
     def open_chrome(self):
         chrome_driver_path = r"F:\python3.11\chromedriver.exe"
         options = Options()
@@ -19,7 +21,7 @@ class Job:
         return driver
     def give_me_job(self):
         driver=self.open_chrome()
-        driver.get("https://www.zhipin.com/beijing/?seoRefer=index")
+        driver.get(self.url)
         wait = WebDriverWait(driver, 10)
         time.sleep(2)
         search_box = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'ipt-search')))
@@ -28,7 +30,7 @@ class Job:
         search_button = wait.until(EC.element_to_be_clickable((By.XPATH, '//button[@class="btn btn-search"]')))
         driver.execute_script("arguments[0].click();", search_button)
 
-        for t in range(100):
+        for t in range(self.pages):
             try:
                 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
                 time.sleep(3)
@@ -43,8 +45,8 @@ class Job:
                 # //*[@id="list"]/div[1]/div[1]/a/div/div[1]/div[1]/div/div
                 jobs = get_element_texts_by_xpath('//span[@class="job-name"]')
                 sals = get_element_texts_by_xpath('//span[@class="salary"]')
-                coms = get_element_texts_by_xpath('//a[@ka="search_list_company_1_custompage"]')
-                nars = get_element_texts_by_xpath('//ul[@class="tag-list"]/li[1]')
+                coms = get_element_texts_by_xpath('//h3[@class="company-name"]/a')
+                nars = get_element_texts_by_xpath('//div[@class="job-info clearfix"]//ul[@class="tag-list"]/li[1]')
                 dets = get_element_texts_by_class('info-desc')
 
                 print("Jobs:", jobs,len(jobs))
@@ -83,7 +85,7 @@ class Job:
         driver.quit()
 
 if __name__=='__main__':
-    # Law=Job('法务')
-    # Data=Job('数据')
+    # Law=Job('法务', "https://www.zhipin.com/beijing/?seoRefer=index", 100)
+    # Data=Job('数据', "https://www.zhipin.com/beijing/?seoRefer=index", 100)
     # Law.give_me_job()
     # Data.give_me_job()
